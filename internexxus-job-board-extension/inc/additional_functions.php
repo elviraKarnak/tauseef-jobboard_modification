@@ -175,9 +175,9 @@ add_filter('acf/prepare_field/name=_author_box_jobs', 'my_acf_prepare_field');
 
 
 
+remove_filter( 'wp-job-board-pro-candidate-fields-admin', array( 'WP_Job_Board_Pro_Custom_Fields', 'admin_candidate_custom_fields' ), 2 );
 
-
-//remove_filter( 'wp-job-board-pro-job_listing-fields-admin', array( 'WP_Job_Board_Pro_Custom_Fields', 'admin_job_listing_custom_fields' ), 10 );
+//remove_filter( 'wp-job-board-pro-job_listing-fields-admin', array( 'WP_Job_Board_Pro_Custom_Fields', 'admin_job_listing_custom_fields' ), 2 );
 
 // remove_action( 'wjbp_ajax_wp_job_board_pro_ajax_create_meeting',  array('WP_Job_Board_Pro_Meeting', 'process_create_meeting'));
 

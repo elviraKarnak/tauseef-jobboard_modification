@@ -33,8 +33,9 @@ if( !class_exists( 'Internexxus_JobBoard_Extension' )){
         function __construct() {
 			$this->define_constants(); 
 
+            require_once( Internexxus_JobBoard_Extension_PATH . 'inc/functions.php' ); 
             require_once( Internexxus_JobBoard_Extension_PATH . 'inc/additional_functions.php' ); 
-            require_once( Internexxus_JobBoard_Extension_PATH . 'inc/internships/function_internships.php' );  
+            require_once( Internexxus_JobBoard_Extension_PATH . 'inc/onboarding/function_onboarding.php' );  
             require_once( Internexxus_JobBoard_Extension_PATH . 'inc/employer_function.php' );
             require_once( Internexxus_JobBoard_Extension_PATH . 'inc/shortcodes/employer-onboard.php' );
             $Internexxus_Employer_onboarding_Shortcodes = new Internexxus_Employer_onboarding_Shortcodes();
@@ -64,13 +65,20 @@ if( !class_exists( 'Internexxus_JobBoard_Extension' )){
             wp_enqueue_style( 'internexxus_jobboard_ui_js', 'https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css', [],1.0);
             wp_enqueue_style( 'font-awesome_css', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css', [],time());
             wp_enqueue_style( 'internexxus_jobboard_renovate_css', Internexxus_JobBoard_Extension_URL.'/assets/css/renovate.css', [],time());
+            wp_enqueue_style( 'internexxus_jobboard_custom_css', Internexxus_JobBoard_Extension_URL.'/assets/css/custom.css', [],time());
 
             
             //scripts
             
             wp_enqueue_script('internexxus_jobboard_googlemap', 'https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&key=AIzaSyBn7lQ3EpDRDudz9BK7Nl2flp3YkaKfqxw', [],1.0, true); 
-            wp_enqueue_script('internexxus_jobboard_ui_js', 'https://code.jquery.com/ui/1.12.1/jquery-ui.min.js', [],1.0, false); 
-            wp_enqueue_script('internexxus_jobboard_renovate_js', Internexxus_JobBoard_Extension_URL.'/assets/js/renovate.js', [],time(), false); 
+            wp_enqueue_script('internexxus_jobboard_ui_js', 'https://code.jquery.com/ui/1.12.1/jquery-ui.min.js', [],1.0, false);
+            wp_enqueue_script('internexxus_jobboard_googleapi', 'https://apis.google.com/js/api.js', [],1.0, true);
+            wp_enqueue_script('internexxus_jobboard_googleapi_gsi', 'https://accounts.google.com/gsi/client', [],1.0, true);
+            
+            wp_enqueue_script('internexxus_jobboard_googlepicker', 'https://apis.google.com/js/api.js?onload=loadPicker', [],1.0, false);  
+            wp_enqueue_script('internexxus_jobboard_renovate_js', Internexxus_JobBoard_Extension_URL.'/assets/js/renovate.js', [],time(), false);
+            wp_enqueue_script('internexxus_jobboard_customjs', Internexxus_JobBoard_Extension_URL.'/assets/js/custom.js', [],time(), false); 
+            wp_localize_script('internexxus_jobboard_customjs', 'ajax_object', array('ajaxurl' => admin_url('admin-ajax.php'),'security' => wp_create_nonce('file_upload_nonce'))); 
         }
         
     }   

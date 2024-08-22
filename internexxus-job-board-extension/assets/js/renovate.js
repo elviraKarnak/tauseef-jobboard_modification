@@ -1,4 +1,4 @@
-jQuery(document).ready(function () {
+jQuery(document).ready(function ($) {
 
     var siteurl = $(".site_url").val();
 
@@ -11,17 +11,47 @@ jQuery(document).ready(function () {
         placeholder: "Select Perks",
         allowClear: true
       });
-      $('#mySelect-4').select2({
-        placeholder: "Select University/College",
-        allowClear: true
-      });
-
+ 
       $('#mySelect-5').select2({
         placeholder: "Select University/College",
         allowClear: true
       });
 
-      
+
+        $('#university_pi').select2({
+            ajax: {
+                url: siteurl+'/wp-admin/admin-ajax.php', // AJAX URL is predefined in WordPress admin
+                dataType: 'json',
+                delay: 250, // delay in ms while typing when to perform a AJAX search
+                data: function (params) {
+                    return {
+                    q: params.term, 
+                    action: 'load_job_taxanomy',
+                    taxanomy_term: 'university_name' 
+
+                    };
+                },
+                processResults: function( data ) {
+            var options = [];
+            if ( data ) {
+            
+                // data is the array of arrays, and each of them contains ID and the Label of the option
+                $.each( data, function( index, text ) { // do not forget that "index" is just auto incremented value
+                options.push( { id: text[0], text: text[1]  } );
+                });
+            
+            }
+            return {
+                results: options
+            };
+            },
+            cache: true
+        },
+        maximumSelectionSize: 10,
+        minimumResultsForSearch: 50,
+        minimumInputLength: 0,
+        placeholder: "Select Skills", // the minimum of symbols to input before perform a search
+        });
 
 
         $('#skills_post_internship').select2({
@@ -60,6 +90,9 @@ jQuery(document).ready(function () {
         });
 
       $('#job_locations_dropdown').select2({
+        containerCssClass: function(e) { 
+            return $(e).attr('required') ? 'required' : '';
+          },
         ajax: {
             url: siteurl+'/wp-admin/admin-ajax.php', // AJAX URL is predefined in WordPress admin
             dataType: 'json',
@@ -287,5 +320,150 @@ jQuery(document).ready(function () {
         changeYear: true,
         yearRange: "1700:2100" // Optional: set year range
     });
-   
+
+
+
+    // job post form
+
+        $('#job_majors').select2({
+            ajax: {
+                url: siteurl+'/wp-admin/admin-ajax.php', // AJAX URL is predefined in WordPress admin
+                dataType: 'json',
+                delay: 250, // delay in ms while typing when to perform a AJAX search
+                data: function (params) {
+                    return {
+                    q: params.term, 
+                    action: 'load_job_taxanomy',
+                    taxanomy_term: 'job_major_minors' 
+
+                    };
+                },
+                processResults: function( data ) {
+            var options = [];
+            if ( data ) {
+            
+                // data is the array of arrays, and each of them contains ID and the Label of the option
+                $.each( data, function( index, text ) { // do not forget that "index" is just auto incremented value
+                options.push( { id: text[0], text: text[1]  } );
+                });
+            
+            }
+            return {
+                results: options
+            };
+            },
+            cache: true
+        },
+        maximumSelectionSize: 10,
+        minimumResultsForSearch: 50,
+        minimumInputLength: 0,
+        placeholder: "Select Majors", // the minimum of symbols to input before perform a search
+        });
+
+
+        $('#job_minors').select2({
+            ajax: {
+                url: siteurl+'/wp-admin/admin-ajax.php', // AJAX URL is predefined in WordPress admin
+                dataType: 'json',
+                delay: 250, // delay in ms while typing when to perform a AJAX search
+                data: function (params) {
+                    return {
+                    q: params.term, 
+                    action: 'load_job_taxanomy',
+                    taxanomy_term: 'job_major_minors' 
+
+                    };
+                },
+                processResults: function( data ) {
+            var options = [];
+            if ( data ) {
+            
+                // data is the array of arrays, and each of them contains ID and the Label of the option
+                $.each( data, function( index, text ) { // do not forget that "index" is just auto incremented value
+                options.push( { id: text[0], text: text[1]  } );
+                });
+            
+            }
+            return {
+                results: options
+            };
+            },
+            cache: true
+        },
+        maximumSelectionSize: 10,
+        minimumResultsForSearch: 50,
+        minimumInputLength: 0,
+        placeholder: "Select Minors", // the minimum of symbols to input before perform a search
+        });
+
+        $('#job_additional_benefits').select2({
+            ajax: {
+                url: siteurl+'/wp-admin/admin-ajax.php', // AJAX URL is predefined in WordPress admin
+                dataType: 'json',
+                delay: 250, // delay in ms while typing when to perform a AJAX search
+                data: function (params) {
+                    return {
+                    q: params.term, 
+                    action: 'load_job_taxanomy',
+                    taxanomy_term: 'job_Job Benifits' 
+
+                    };
+                },
+                processResults: function( data ) {
+            var options = [];
+            if ( data ) {
+            
+                // data is the array of arrays, and each of them contains ID and the Label of the option
+                $.each( data, function( index, text ) { // do not forget that "index" is just auto incremented value
+                options.push( { id: text[0], text: text[1]  } );
+                });
+            
+            }
+            return {
+                results: options
+            };
+            },
+            cache: true
+        },
+        maximumSelectionSize: 10,
+        minimumResultsForSearch: 50,
+        minimumInputLength: 0,
+        placeholder: "Additional Benefits", // the minimum of symbols to input before perform a search
+        });
+
+        $('#jobs_perks').select2({
+            ajax: {
+                url: siteurl+'/wp-admin/admin-ajax.php', // AJAX URL is predefined in WordPress admin
+                dataType: 'json',
+                delay: 250, // delay in ms while typing when to perform a AJAX search
+                data: function (params) {
+                    return {
+                    q: params.term, 
+                    action: 'load_job_taxanomy',
+                    taxanomy_term: 'job_Perks' 
+
+                    };
+                },
+                processResults: function( data ) {
+            var options = [];
+            if ( data ) {
+            
+                // data is the array of arrays, and each of them contains ID and the Label of the option
+                $.each( data, function( index, text ) { // do not forget that "index" is just auto incremented value
+                options.push( { id: text[0], text: text[1]  } );
+                });
+            
+            }
+            return {
+                results: options
+            };
+            },
+            cache: true
+        },
+        maximumSelectionSize: 10,
+        minimumResultsForSearch: 50,
+        minimumInputLength: 0,
+        placeholder: "Perks", // the minimum of symbols to input before perform a search
+        });
+    
 });
